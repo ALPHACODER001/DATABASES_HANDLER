@@ -23,8 +23,3 @@ read_by_nosql_engine()
 
 
 
-
-
-
-# truck={"name":"BM"}
-# trucks_doc.insert(truck)
