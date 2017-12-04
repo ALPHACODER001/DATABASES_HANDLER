@@ -1,12 +1,19 @@
 
 
-
 import pandas as pd
 import numpy as np
+import os
+
+
 
 def get_table_rows(file_name):
+    """the function return list of dicts , by extracting the tables"""
 
-    df = pd.read_csv('./'+file_name+'.csv')
+    path_to_data=os.getcwd().split("/")
+    path_to_data[len(path_to_here)-1]="data_sources/"
+    path_to_data="/".join(path_to_here)
+
+    df = pd.read_csv(path_to_data+file_name+'.csv')
     Blocks=dict()
     List_of_Rows=list()
 
