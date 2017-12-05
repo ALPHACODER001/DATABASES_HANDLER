@@ -16,4 +16,4 @@ this project to deal with any kind of databases ( relational , key-value, docume
 
 - [ ] build redis database client app -by omar-, which connect and insert values that come from [Data_handler.py](source_code/Data_Handler.py)
 
-- [ ] building the code to set data inside relational Db by -zaid- 
+- [x] building the code to set data inside relational Db by -zaid- 
