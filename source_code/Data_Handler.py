@@ -1,6 +1,5 @@
 
 
-
 import pandas as pd
 import numpy as np
 import os
@@ -16,7 +15,7 @@ else :
 
 def write_json(json_structure):
     if write_on_file:
-        f=open('json_structure.json', 'w+')
+        f=open(file_name+'.json', 'w+')
         f.write(str(json_structure))
         f.close()
 
@@ -39,5 +38,6 @@ def get_table_rows(file_name):
 
     return List_of_Rows
 
-json_structure=json.dumps(get_table_rows("trucks"))
+file_name=sys.argv[2] # provide name without externsion of the file like trucks
+json_structure=json.dumps(get_table_rows(file_name))
 write_json(json_structure)
