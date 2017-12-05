@@ -1,17 +1,31 @@
 
 
+
 import pandas as pd
 import numpy as np
 import os
+import json
+import sys
+
+vague_for_computer=["false","False","F","f"]
+if sys.argv[1] in vague_for_computer:
+    write_on_file=not(bool(sys.argv[1]))
+else :
+    write_on_file=bool(sys.argv[1])
 
 
+def write_json(json_structure):
+    if write_on_file:
+        f=open('json_structure.json', 'w+')
+        f.write(str(json_structure))
+        f.close()
 
 def get_table_rows(file_name):
     """the function return list of dicts , by extracting the tables"""
 
     path_to_data=os.getcwd().split("/")
-    path_to_data[len(path_to_here)-1]="data_sources/"
-    path_to_data="/".join(path_to_here)
+    path_to_data[len(path_to_data)-1]="data_sources/"
+    path_to_data="/".join(path_to_data)
 
     df = pd.read_csv(path_to_data+file_name+'.csv')
     Blocks=dict()
@@ -24,3 +38,6 @@ def get_table_rows(file_name):
             List_of_Rows.append(dict(Blocks[cursor]["object"]))
 
     return List_of_Rows
+
+json_structure=json.dumps(get_table_rows("trucks"))
+write_json(json_structure)
