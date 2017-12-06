@@ -22,7 +22,7 @@ def write_json(json_structure):
         f.write(str(json_structure))
         f.close()
 
-def get_table_rows(file_name,type_of_data):
+def get_table_rows(file_name,type_of_data='dictoinary'):
     """the function return list of dicts , by extracting the tables"""
 
     path_to_data=os.getcwd().split("/")
