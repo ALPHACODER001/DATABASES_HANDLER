@@ -11,8 +11,9 @@ graph = Graph()
 your_Database_port_that_running="7474" # in my case , thats the port , be assure that the port is running from neo4js
 Password="neo4j"
 user_name="neo4j"
+local_host="127.0.0.1/"
 
-remote_graph = Graph("127.0.0.1/"+your_Database_port_that_running, user_name, Password)
+remote_graph = Graph(local_host+your_Database_port_that_running, user_name, Password)
 alice = Node("person", name = "alice")
 bob = Node("person", name = "Bob")
 alice_knows_Bob = Relationship(alice, "knows", bob)
