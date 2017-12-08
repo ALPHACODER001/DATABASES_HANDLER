@@ -16,7 +16,7 @@ graph = Graph()
 remote_graph = Graph(local_host+your_Database_port_that_running, user_name, Password)
 
 ## use the Data_handler module to fill , nodes , it's already return dictonary
-## loop through keys , for each key extract it's value and fill it in each ndoe 
+## loop through keys , for each key extract it's value and fill it in each node 
 
 alice = Node("person", name = "alice")
 bob = Node("person", name = "Bob")
