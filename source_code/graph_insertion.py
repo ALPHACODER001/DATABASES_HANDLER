@@ -1,27 +1,32 @@
+import sys, csv
+from py2neo import neo4j, authenticate, Graph
 
-import sys
-#choosing the directory of packages , based in your python version change the number ,
-sys.path.append('/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages')
-import json
-from py2neo import Graph,Relationship,Node
+def main():
 
-your_Database_port_that_running="7474" # in my case , thats the port , be assure that the port is running from neo4js
-Password="neo4j"
-user_name="neo4j"
-local_host="127.0.0.1/"
+    sys.path.append('/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages')
 
+    graph = Graph("127.0.0.1/7474","oawajan","80302170812")
 
+    graph.execute("load csv with headers from F:\\Users\\oawajan\\Documents\\Courses\\data-science\\BigData\\hw1\\DATABASES_HANDLER-master\\source_code\\geolocation.csv \
+                              as geolocation create (a1:geolocation {truckid:geolocation.truckid,driverid:geolocation.driverid,event:geolocation.event \
+                              latitude:geolocation.latitude,longitude:geolocation.longitude,city:geolocation.city,velocity:geolocation.velocity, \
+                              event:geolocation.event,idling_ind:geolocation.idling_ind})")
+    graph.execute("load csv with headers from F:\\Users\\oawajan\\Documents\\Courses\\data-science\\BigData\\hw1\\DATABASES_HANDLER-master\\source_code\\geolocation.csv \
+        as trucks create (a1:truks {driverid:trucks.driverid,truckid:trucks.truckid,model:trucks.model})")
 
-graph = Graph()
-remote_graph = Graph(local_host+your_Database_port_that_running, user_name, Password)
+    with open("geolocation.csv", newline ='') as gelocation:
+        with open("trucks.csv",newline='') as trucks:
 
-## use the Data_handler module to fill , nodes , it's already return dictonary
-## loop through keys , for each key extract it's value and fill it in each node 
+            ReadGeolocation = csv.DictReader(gelocation)
+            ReadTrucks = csv.DictReader(trucks)
 
-alice = Node("person", name = "alice")
-bob = Node("person", name = "Bob")
-alice_knows_Bob = Relationship(alice, "knows", bob)
+            for row in ReadGeolocation:
+                print(row['truckid'],row['driverid'],row['event'],row['latitude'],row['longitude'],row['city'],row['velocity'],
+                    row['event_ind'],row['idling_ind'])
 
+            for row in ReadTrucks:
+                print(row['truckid'], row['driverid'], row['event'], row['latitude'], row['longitude'], row['city'],
+                      row['velocity'], row['event_ind'], row['idling_ind'])
 
-
-graph.create(alice_knows_Bob)
+if __name__ == '__main__':
+    main()
